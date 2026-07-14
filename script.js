@@ -9,13 +9,112 @@ const pages = document.querySelectorAll(".page");
 
 const answers = {};
 
-const t =
-    `Hello Agent Darshana. 
-    
-    A special mission has been generated just for you...`;
+const bootLines = [
+    "WeekendOS v2.3.1",
+    "",
+    "Initializing AI...",
+    "Loading Coffee Database...",
+    "Loading Fun Engine...",
+    "Checking Weather...",
+    "Calculating Fun Probability...",
+    "",
+    "Mission Ready ✔"
+];
 
-let i = 0;
-(function f(){if(i<t.length){typing.textContent+=t[i++];setTimeout(f,30)}})();function showPage(id){pages.forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active')}function answer(k,v){answers[k]=v;if(k==='drink'){q2.classList.remove('hidden')}else{showPage('loading');load()}}function load(){let p=0;status.textContent='Checking weather...';const x=setInterval(()=>{p+=2;fill.style.width=p+'%';if(p>=100){clearInterval(x);showPage('result')}},40)}async function submitChoice(choice) {
+const bootText = document.getElementById("bootText");
+const bootProgress = document.getElementById("bootProgress");
+const continueBtn = document.getElementById("continueBtn");
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function playBootSequence() {
+    bootText.textContent = "";
+
+    for (let i = 0; i < bootLines.length; i++) {
+        bootText.textContent += bootLines[i] + "\n";
+        bootProgress.style.width = `${((i + 1) / bootLines.length) * 100}%`;
+        await sleep(700);
+    }
+
+    continueBtn.style.display = "inline-block";
+}
+
+playBootSequence();
+
+function showPage(id){pages.forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active')}function answer(key, value) {
+    answers[key] = value;
+
+    document.querySelectorAll(".choice").forEach(button => {
+        if (button.onclick.toString().includes(`'${key}','${value}'`)) {
+            button.style.background = "#6d5dfc";
+            button.style.borderColor = "#9b8cff";
+        }
+    });
+}
+async function runAnalysis() {
+
+    showPage("analysis");
+
+    const steps = [
+        "Reading mission data...",
+        "Coffee preference detected ✓",
+        "Activity preference detected ✓",
+        "Checking weather...",
+        "Searching fun database...",
+        "Estimating laughter probability...",
+        "Calculating compatibility..."
+    ];
+
+    const text = document.getElementById("analysisText");
+    const fill = document.getElementById("fill");
+
+    for (let i = 0; i < steps.length; i++) {
+
+        text.textContent = steps[i];
+
+        fill.style.width = `${((i + 1) / steps.length) * 100}%`;
+
+        await sleep(800);
+    }
+
+    showFinalResult();
+}
+
+function showFinalResult() {
+
+    document.querySelector("#analysis .glass-card").innerHTML = `
+
+        <h2>✅ MISSION APPROVED</h2>
+
+        <h1>You should hang out this weekend.</h1>
+
+        <p>
+            After carefully analyzing every piece of available data,
+            our AI has reached one conclusion.
+        </p>
+
+        <div class="mission-item">
+            <span>Mission Success Probability</span>
+            <strong>98%</strong>
+        </div>
+
+        <button onclick="submitChoice('im_in')">
+            😄 I'm In
+        </button>
+
+        <button class="secondary"
+                onclick="submitChoice('let_me_check')">
+
+            📅 Let Me Check
+
+        </button>
+
+    `;
+}
+
+async function submitChoice(choice) {
 
     answers.finalChoice = choice;
 
@@ -41,4 +140,19 @@ let i = 0;
     }
 
     alert("Mission response saved successfully! 🎉");
+}
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("span");
+
+    star.classList.add("star");
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    star.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+    stars.appendChild(star);
 }
