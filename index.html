@@ -15,15 +15,144 @@
         <link rel="stylesheet" href="style.css">
     </head>
 <body>
-    <div id='bg'></div>
-    <section id='intro' class='page active'><div class='card'>
-        <h1>🎮 Weekend Side Quest</h1><p id='typing'></p><button onclick="showPage('questions')">Start Mission</button></div>
+    <div id="sky">
+        <div class="moon-halo"></div>
+        <svg class="moon" viewBox="0 0 120 120">
+            <defs>
+                <radialGradient id="moonGlow">
+                    <stop offset="0%" stop-color="#FFFDF5"/>
+                    <stop offset="70%" stop-color="#F8F1C7"/>
+                    <stop offset="100%" stop-color="#E8DEB0"/>
+                </radialGradient>
+            </defs>
+        
+            <circle cx="60" cy="60" r="40" fill="url(#moonGlow)"/>
+        
+            <circle cx="48" cy="48" r="5" fill="#E5D9A3"/>
+            <circle cx="72" cy="72" r="7" fill="#E5D9A3"/>
+            <circle cx="76" cy="42" r="4" fill="#E5D9A3"/>
+        </svg>
+        <div id="stars"></div>
+        <svg class="cloud cloud1" viewBox="0 0 260 120">
+            <path d="M50 90
+                        C20 90 15 55 45 55
+                        C55 20 100 20 115 50
+                        C135 35 170 40 180 65
+                        C215 60 235 80 225 100
+                        L50 100 Z"/>
+        </svg>
+        
+        <svg class="cloud cloud2" viewBox="0 0 260 120">
+            <path d="M55 90
+                        C25 90 20 55 48 55
+                        C58 18 108 18 122 50
+                        C145 35 180 42 188 66
+                        C220 60 240 82 232 100
+                        L55 100 Z"/>
+        </svg>
+
+        <svg class="cloud cloud3" viewBox="0 0 260 120">
+            <path d="M55 90
+                        C25 90 20 55 48 55
+                        C58 18 108 18 122 50
+                        C145 35 180 42 188 66
+                        C220 60 240 82 232 100
+                        L55 100 Z"/>
+        </svg>
+    </div>
+    <section id="intro" class="page active">
+    
+        <div class="hero">
+            <h1 id="heroTitle">Hello, Agent Darshana.</h1>
+    
+            <p id="heroSubtitle">
+                A secret mission has been assigned to you.
+            </p>
+    
+            <button id="openMissionBtn" onclick="showPage('mission')">
+                Open Mission →
+            </button>
+        </div>
     </section>
-    <section id='questions' class='page'><div class='card'>
-        <h2>Quick Calibration</h2><h3>Coffee or Tea?</h3><button onclick="answer('drink','Coffee')">☕ Coffee</button><button onclick="answer('drink','Tea')">🍵 Tea</button><div id='q2' class='hidden'><h3>Movie or Bowling?</h3><button onclick="answer('activity','Movie')">🎬 Movie</button><button onclick="answer('activity','Bowling')">🎳 Bowling</button></div></div>
+    <section id="mission" class="page">
+
+        <div class="glass-card">
+    
+            <div class="tag">
+                CLASSIFIED
+            </div>
+    
+            <h2>MISSION #02</h2>
+    
+            <h1>Hello, Agent Darshana.</h1>
+    
+            <p>
+                Your presence has been requested
+                for a high-priority weekend operation.
+            </p>
+    
+            <hr>
+    
+            <h3>Preferred Fuel</h3>
+    
+            <div class="option-row">
+    
+                <button class="choice"
+                    onclick="answer('drink','Coffee')">
+    
+                    ☕ Coffee
+    
+                </button>
+    
+                <button class="choice"
+                    onclick="answer('drink','Tea')">
+    
+                    🍵 Tea
+    
+                </button>
+    
+            </div>
+    
+            <h3>Preferred Mission</h3>
+    
+            <div class="option-row">
+                <button class="choice" onclick="answer('activity','Movie')">
+                    🎬 Movie
+                </button>
+            
+                <button class="choice" onclick="answer('activity','Food')">
+                    🍜 Food
+                </button>
+                
+                <button class="choice" onclick="answer('activity','Suprise Me')">
+                    ✨ Suprise Me
+                </button>
+            </div>
+    
+            <button onclick="runAnalysis()">
+                Continue →
+            </button>
+    
+        </div>
+    
     </section>
-    <section id='loading' class='page'>
-        <div class='card'><h2>Analyzing...</h2><div class='bar'><div id='fill'></div></div><p id='status'></p></div>
+    
+    <section id="analysis" class="page">
+
+        <div class="glass-card">
+    
+            <h2>🤖 AI ANALYSIS</h2>
+    
+            <p id="analysisText">
+                Initializing...
+            </p>
+    
+            <div class="bar">
+                <div id="fill"></div>
+            </div>
+    
+        </div>
+    
     </section>
     <section id='result' class='page'><div class='card'>
         <h1>✨ Mission Result</h1><h2>We should hang out this weekend 😊</h2><button onclick="submitChoice('Im in!')">😁 I'm in!</button><button class='secondary' onclick="submitChoice('Let me check')">📅 Let me check</button></div>
