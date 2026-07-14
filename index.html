@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Weekend Side Quest</title>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+            rel="stylesheet">
+    
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div id='bg'></div>
+    <section id='intro' class='page active'><div class='card'>
+        <h1>🎮 Weekend Side Quest</h1><p id='typing'></p><button onclick="showPage('questions')">Start Mission</button></div>
+    </section>
+    <section id='questions' class='page'><div class='card'>
+        <h2>Quick Calibration</h2><h3>Coffee or Tea?</h3><button onclick="answer('drink','Coffee')">☕ Coffee</button><button onclick="answer('drink','Tea')">🍵 Tea</button><div id='q2' class='hidden'><h3>Movie or Bowling?</h3><button onclick="answer('activity','Movie')">🎬 Movie</button><button onclick="answer('activity','Bowling')">🎳 Bowling</button></div></div>
+    </section>
+    <section id='loading' class='page'>
+        <div class='card'><h2>Analyzing...</h2><div class='bar'><div id='fill'></div></div><p id='status'></p></div>
+    </section>
+    <section id='result' class='page'><div class='card'>
+        <h1>✨ Mission Result</h1><h2>We should hang out this weekend 😊</h2><button onclick="submitChoice('Im in!')">😁 I'm in!</button><button class='secondary' onclick="submitChoice('Let me check')">📅 Let me check</button></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src='script.js'></script>
+</body>
+</html>
